@@ -4,7 +4,7 @@ graylog2-ldirectord
 
 Check script for ldirectord (ipvsadm/LVS) for Graylog2. If you use ldirectord with Linux Virtual Server, you have to check if your Graylog2 Server instance is running and processing of messages is enabled. (Only Graylog2 **> 0.20-rc1**)
 
-ldirectord works with external scripts, but this does an fork every time ldirectord checks the health of an real server. That's why this script works as ```checktype=external-perl```.
+ldirectord works with external scripts, but this does an fork every time ldirectord checks the health of an real server. That's why this script works as ```checktype=external-perl``` - no forking is needed to check the servers. Perl script will be embedded into ldirectord!
 
 Installation
 ----------------
