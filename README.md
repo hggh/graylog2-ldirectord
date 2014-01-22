@@ -33,7 +33,7 @@ This script checks if Graylog2 responds within time (default: 1s) and if node is
 For testing you can run the check script without ldirectord:
 
 ```bash
- /usr/local/bin/graylog2-ldirectord 192.168.100.100 12201 10.10.0.2 10.10.0.2:12201
+ /usr/local/bin/graylog2-ldirectord 192.168.100.100 12201 10.10.0.2 12201
 ```
 
 If the return code is none zero, a error occurred.
