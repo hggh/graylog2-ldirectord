@@ -1,4 +1,3 @@
-
 graylog2-ldirectord
 ===================
 
@@ -18,19 +17,24 @@ Configuration
 -----------------------
 
  * configure ldirectord (**/etc/ldirectord.cf**):
-> virtual=192.168.100.100:12201
->      real=10.10.0.2:12201 masq
->      real=10.10.0.3:12201 masq
->      protocol=udp
->      scheduler=rr
->      checkcommand=/usr/local/bin/graylog2-ldirectord
->      checktype=external-perl
+
+```bash
+   virtual=192.168.100.100:12201
+       real=10.10.0.2:12201 masq
+       real=10.10.0.3:12201 masq
+       protocol=udp
+       scheduler=rr
+       checkcommand=/usr/local/bin/graylog2-ldirectord
+       checktype=external-perl
+```
 
 This script checks if Graylog2 responds within time (default: 1s) and if node is enabled for processing log files.
 
 For testing you can run the check script without ldirectord:
 
->  /usr/local/bin/graylog2-ldirectord 192.168.100.100 12201 10.10.0.2 10.10.0.2:12201
+```bash
+ /usr/local/bin/graylog2-ldirectord 192.168.100.100 12201 10.10.0.2 10.10.0.2:12201
+```
 
 If the return code is none zero, a error occurred.
 
