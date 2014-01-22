@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+# Copyright: Jonas Genannt <jonas.genannt@capi2name.de>, GPLv2
+
+use warnings;
+use strict;
+use LWP::UserAgent;
+use Config::General;
+use JSON::XS;
+my ($virtual_ip, $virtual_port, $real_ip, $real_port) = @ARGV;
+
+unless ($real_ip) {
+  print "no real IP found\n";
+  exit(1);
+}
+my $url = "http://" . $real_ip . ":12900/system";
+
+my $conf = Config::General->new("/etc/graylog2-ldirectord.conf");
+my %config = $conf->getall;
+
+my $ua = LWP::UserAgent->new;
+$ua->agent("ldirectord/test/0.1");
+$ua->timeout($config{'timeout'});
+
+my $request = HTTP::Request->new( GET => $url);
+$request->authorization_basic($config{'username'}, $config{'password'});
+$request->content_type('application/json');
+
+my $response = $ua->request($request);
+if ($response and $response->is_success) {
+  my $json = decode_json $response->content;
+  if ($json and $json->{'is_processing'}) {
+    exit(0);
+  }
+}
+
+exit(1);
