@@ -28,7 +28,7 @@ $request->content_type('application/json');
 my $response = $ua->request($request);
 if ($response and $response->is_success) {
   my $json = decode_json $response->content;
-  if ($json and $json->{'is_processing'}) {
+  if ($json and $json->{'is_processing'} and $json->{'lb_status'} eq "alive") {
     exit(0);
   }
 }
